@@ -1,10 +1,14 @@
 package com.barbos.sergey.tutu_testproject.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.barbos.sergey.tutu_testproject.R;
 import com.barbos.sergey.tutu_testproject.adapter.CustomAdapter;
@@ -22,21 +26,24 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String DEPARTURE = "DEPARTURE";
 
     private String mJsonData;
 
     private DetailForDuty mDetailForDuty;
 
-    private AutoCompleteTextView mDepartureAutoCompleteTextView;
-    private AutoCompleteTextView mDestinationAutoCompleteTextView;
+    private EditText mDepartureEd;
+    private EditText mDestinationEd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDepartureAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteDeparture);
-        mDestinationAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autoCompleteDestination);
+
+        mDepartureEd = (EditText)findViewById(R.id.editTextDepartureAddress);
+        mDestinationEd = (EditText)findViewById(R.id.editTextDestinationAddress);
+
 
         mDetailForDuty = new DetailForDuty();
 
@@ -52,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }*/
 
-        CustomAdapter adapterDeparture = new CustomAdapter(getApplicationContext(), mDetailForDuty.getStationsOrigination());
+        /*CustomAdapter adapterDeparture = new CustomAdapter(getApplicationContext(), mDetailForDuty.getStationsOrigination());
         mDepartureAutoCompleteTextView.setAdapter(adapterDeparture);
 
         CustomAdapter adapterDestination = new CustomAdapter(getApplicationContext(), mDetailForDuty.getStationsDestination());
-        mDestinationAutoCompleteTextView.setAdapter(adapterDestination);
+        mDestinationAutoCompleteTextView.setAdapter(adapterDestination);*/
         /*mDepartureAutoCompleteTextView.showDropDown();*/
 
     }
@@ -175,4 +182,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void departureMethod(View view) {
+        Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
+        intent.putExtra(DEPARTURE, mDetailForDuty.getStationsOrigination());
+        startActivity(intent);
+    }
 }

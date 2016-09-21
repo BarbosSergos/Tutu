@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tutu_testProject</string>
+    <string name="emptyTextView_Text">Stantion not found.</string>
 </resources>
