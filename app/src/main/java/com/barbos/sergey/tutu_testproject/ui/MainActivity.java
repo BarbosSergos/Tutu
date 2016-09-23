@@ -1,6 +1,7 @@
 package com.barbos.sergey.tutu_testproject.ui;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,19 +54,6 @@ public class MainActivity extends AppCompatActivity {
         if (mJsonData != null) {
             parseJSONData(mJsonData);
         }
-
-/*        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-        /*CustomAdapter adapterDeparture = new CustomAdapter(getApplicationContext(), mDetailForDuty.getStationsOrigination());
-        mDepartureAutoCompleteTextView.setAdapter(adapterDeparture);
-
-        CustomAdapter adapterDestination = new CustomAdapter(getApplicationContext(), mDetailForDuty.getStationsDestination());
-        mDestinationAutoCompleteTextView.setAdapter(adapterDestination);*/
-        /*mDepartureAutoCompleteTextView.showDropDown();*/
 
     }
 
@@ -149,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Station[] getStationsTo(JSONObject jsonOnject) throws JSONException {
 
-        ArrayList<Station> stationFrm = new ArrayList<Station>();
+        ArrayList<Station> stationTo = new ArrayList<Station>();
 
         //Получаем JSON массив всех стран и городов
         JSONArray countriesAndCities = jsonOnject.getJSONArray("citiesTo");
@@ -161,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             //Получаем JSON массив станций данного города
             JSONArray stations = countryCity.getJSONArray("stations");
 
-            //заполняем массив станция для данного города
+            //заполняем массив станций для данного города
             for (int j = 0; j < stations.length(); j++) {
                 JSONObject station = stations.getJSONObject(j);
 
@@ -173,18 +162,24 @@ public class MainActivity extends AppCompatActivity {
                 objectToAdd.setDistrictTitle(station.getString("districtTitle"));
                 objectToAdd.setStationTitle(station.getString("stationTitle"));
 
-                stationFrm.add(objectToAdd);
+                stationTo.add(objectToAdd);
             }
 
         }
 
-        return stationFrm.toArray(new Station[stationFrm.size()]);
+        return stationTo.toArray(new Station[stationTo.size()]);
     }
 
 
     public void departureMethod(View view) {
         Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
         intent.putExtra(DEPARTURE, mDetailForDuty.getStationsOrigination());
+        startActivity(intent);
+    }
+
+    public void destinationMethod(View view) {
+        Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
+        intent.putExtra(DEPARTURE, mDetailForDuty.getStationsDestination());
         startActivity(intent);
     }
 }

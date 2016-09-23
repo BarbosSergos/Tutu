@@ -5,25 +5,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.barbos.sergey.tutu_testproject.R;
 import com.barbos.sergey.tutu_testproject.data.Station;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Sergey on 21.09.2016.
  */
 
-public class DepartureAdapter extends BaseAdapter {
+public class DepartureAdapter extends BaseAdapter implements Filterable{
 
     private Context mContext;
     private Station[] mStationList;
+    private Station[] mCopyOfFullStationList;
 
     public DepartureAdapter(Context applicationContext, Station[] stations) {
         mContext = applicationContext;
         mStationList = stations;
+        mCopyOfFullStationList = stations;
     }
 
     @Override
@@ -66,6 +71,51 @@ public class DepartureAdapter extends BaseAdapter {
         viewHolder.mStationTitle.setText(station.getStationTitle());
 
         return viewConvert;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                FilterResults filterResults = new FilterResults();
+
+                if (charSequence != null) {
+                    List<Station> stations = findStations(mContext, charSequence.toString());
+                    // Assign the data to the FilterResults
+                    filterResults.values = stations;
+                    filterResults.count = stations.size();
+                }
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+                if (filterResults != null && filterResults.count > 0) {
+                    List<Station> tmp = (List<Station>) filterResults.values;
+                    mStationList = new Station[tmp.size()];
+                    tmp.toArray(mStationList);
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetInvalidated();
+                }
+            }
+        };
+    }
+
+
+    private List<Station> findStations(Context context, String searchFor) {
+
+        List<Station> stations = new ArrayList<Station>(mCopyOfFullStationList.length);
+
+        for (int i = 0; i < mCopyOfFullStationList.length - 1; i++) {
+            if (mCopyOfFullStationList[i].getStationTitle().toLowerCase().startsWith(searchFor.toLowerCase()) || mCopyOfFullStationList[i].getStationTitle().toLowerCase().contains(searchFor.toLowerCase())) {
+                stations.add(mCopyOfFullStationList[i]);
+            }
+        }
+        return stations;
     }
 
     public static class ViewHolder{

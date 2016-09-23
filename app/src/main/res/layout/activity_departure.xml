@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_departure"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.barbos.sergey.tutu_testproject.ui.DepartureActivity">
 
     <TextView
@@ -25,15 +23,18 @@
         android:id="@android:id/list"
         android:divider="?attr/dividerHorizontal"
         android:dividerHeight="2dp"
-        android:layout_below="@+id/seekBar2"
-        android:layout_alignParentStart="true"/>
+        android:paddingTop="30dp"/>
 
-    <SeekBar
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar2"
+        android:ems="10"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:thumb="?android:attr/actionModeWebSearchDrawable"/>
+        android:id="@+id/editTextSearch"
+        tools:text="Name Sergey"
+        android:textAlignment="center"
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="textVisiblePassword"
+        android:paddingBottom="10dp"/>
 
 </RelativeLayout>

@@ -29,6 +29,7 @@
             android:hint="Enter destination station"
             android:layout_weight="1"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center_horizontal"/>
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="destinationMethod"/>
     </LinearLayout>
 </LinearLayout>
