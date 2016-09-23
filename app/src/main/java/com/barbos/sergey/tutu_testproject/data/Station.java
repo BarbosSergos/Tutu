@@ -3,10 +3,12 @@ package com.barbos.sergey.tutu_testproject.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by Sergey on 20.09.2016.
  */
-public class Station implements Parcelable {
+public class Station implements Parcelable, Serializable {
 
     private String mCountryTitle;
     private String mCityTitle;

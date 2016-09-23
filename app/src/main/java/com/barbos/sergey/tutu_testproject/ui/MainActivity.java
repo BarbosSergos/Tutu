@@ -1,18 +1,19 @@
 package com.barbos.sergey.tutu_testproject.ui;
 
+import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ListView;
 
 import com.barbos.sergey.tutu_testproject.R;
-import com.barbos.sergey.tutu_testproject.adapter.CustomAdapter;
+import com.barbos.sergey.tutu_testproject.adapter.DepartureAdapter;
 import com.barbos.sergey.tutu_testproject.data.DetailForDuty;
 import com.barbos.sergey.tutu_testproject.data.Station;
 
@@ -20,15 +21,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String DEPARTURE = "DEPARTURE";
+    public static final String LIST_OF_DESTINATION_STATIONS = "listOfDestinationStations";
+    public static final String LIST_OF_DEPARTURE_STATIONS = "listOfDepartureStations";
 
     private String mJsonData;
 
@@ -54,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         if (mJsonData != null) {
             parseJSONData(mJsonData);
         }
+
 
     }
 
@@ -133,6 +141,21 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        //Запишем полученный массив станций отправления в файл
+
+        FileOutputStream fos = null;
+        try {
+        fos = getApplicationContext().openFileOutput(LIST_OF_DEPARTURE_STATIONS, Context.MODE_PRIVATE);
+        ObjectOutputStream oos = null;
+        oos = new ObjectOutputStream(fos);
+        oos.writeObject(stationFrm);
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return stationFrm.toArray(new Station[stationFrm.size()]);
     }
 
@@ -167,19 +190,40 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        //Запишем полученный массив станций назначения в файл
+
+        FileOutputStream fos = null;
+        try {
+            fos = getApplicationContext().openFileOutput(LIST_OF_DESTINATION_STATIONS, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = null;
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(stationTo);
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return stationTo.toArray(new Station[stationTo.size()]);
     }
 
-
+//Пока отключим эти методы, в XML убрал вызов метода onClick, буду пробовать формировать лист по mEditText.addTextChangedListener
     public void departureMethod(View view) {
         Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
-        intent.putExtra(DEPARTURE, mDetailForDuty.getStationsOrigination());
+        /*intent.putExtra(DEPARTURE, mDetailForDuty.getStationsOrigination());*/
+        intent.putExtra(LIST_OF_DEPARTURE_STATIONS, 1);
         startActivity(intent);
     }
 
     public void destinationMethod(View view) {
         Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
-        intent.putExtra(DEPARTURE, mDetailForDuty.getStationsDestination());
+        /*intent.putExtra(DEPARTURE, mDetailForDuty.getStationsDestination());*/
+        intent.putExtra(LIST_OF_DESTINATION_STATIONS, 2);
         startActivity(intent);
     }
+
+
+
+
 }
