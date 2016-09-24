@@ -1,19 +1,18 @@
 package com.barbos.sergey.tutu_testproject.ui;
 
-import android.app.ListActivity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import com.barbos.sergey.tutu_testproject.R;
-import com.barbos.sergey.tutu_testproject.adapter.DepartureAdapter;
 import com.barbos.sergey.tutu_testproject.data.DetailForDuty;
 import com.barbos.sergey.tutu_testproject.data.Station;
 
@@ -28,7 +27,6 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,12 +35,14 @@ public class MainActivity extends AppCompatActivity {
     public static final String LIST_OF_DESTINATION_STATIONS = "listOfDestinationStations";
     public static final String LIST_OF_DEPARTURE_STATIONS = "listOfDepartureStations";
 
+
     private String mJsonData;
 
     private DetailForDuty mDetailForDuty;
 
     private EditText mDepartureEd;
     private EditText mDestinationEd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         mDepartureEd = (EditText)findViewById(R.id.editTextDepartureAddress);
         mDestinationEd = (EditText)findViewById(R.id.editTextDestinationAddress);
-
 
         mDetailForDuty = new DetailForDuty();
 
@@ -212,18 +211,23 @@ public class MainActivity extends AppCompatActivity {
     public void departureMethod(View view) {
         Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
         /*intent.putExtra(DEPARTURE, mDetailForDuty.getStationsOrigination());*/
-        intent.putExtra(LIST_OF_DEPARTURE_STATIONS, 1);
+        /*intent.putExtra(LIST_OF_DEPARTURE_STATIONS, 1);*/
+        intent.putExtra(LIST_OF_DEPARTURE_STATIONS, true);
         startActivity(intent);
     }
 
     public void destinationMethod(View view) {
         Intent intent = new Intent(getApplicationContext(), DepartureActivity.class);
         /*intent.putExtra(DEPARTURE, mDetailForDuty.getStationsDestination());*/
-        intent.putExtra(LIST_OF_DESTINATION_STATIONS, 2);
+        /*intent.putExtra(LIST_OF_DESTINATION_STATIONS, 2);*/
+        intent.putExtra(LIST_OF_DESTINATION_STATIONS, true);
         startActivity(intent);
     }
 
 
+    public void callDatePicker(View view) {
 
-
+        DialogFragment dialog = new com.barbos.sergey.tutu_testproject.ui.DatePicker();
+        dialog.show(getFragmentManager(), "datePicker");
+    }
 }

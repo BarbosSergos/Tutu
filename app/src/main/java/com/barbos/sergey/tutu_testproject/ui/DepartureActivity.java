@@ -34,42 +34,22 @@ public class DepartureActivity extends ListActivity {
         mEditText = (EditText) findViewById(R.id.editTextSearch);
         Intent intent = getIntent();
 
-        int DepartureBehaviorID = intent.getIntExtra(LIST_OF_DEPARTURE_STATIONS, 0);
-        int DestinationBehaviorID = intent.getIntExtra(LIST_OF_DESTINATION_STATIONS, 0);
+        /*int DepartureBehaviorID = intent.getIntExtra(LIST_OF_DEPARTURE_STATIONS, 0);*/
+        boolean DepartureBehaviorID = intent.getBooleanExtra(LIST_OF_DEPARTURE_STATIONS, false);
+        /*int DestinationBehaviorID = intent.getIntExtra(LIST_OF_DESTINATION_STATIONS, 0);*/
+        boolean DestinationBehaviorID = intent.getBooleanExtra(LIST_OF_DESTINATION_STATIONS, false);
 
         /*Parcelable[] parcelables = intent.getParcelableArrayExtra(MainActivity.DEPARTURE);
 
         mStations = Arrays.copyOf(parcelables, parcelables.length, Station[].class);*/
 
-        if (DepartureBehaviorID == 1 && DestinationBehaviorID == 0) {
+        if (DepartureBehaviorID && !DestinationBehaviorID) {
 
             //Попробуем здесь получить ссылку на файл с массивом станций отправления, прочесть его содержимое и преобразовать в лист с помощью адаптера.
-            FileInputStream fis;
-            try {
-                fis = openFileInput(LIST_OF_DEPARTURE_STATIONS);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                ArrayList<Station> returnlist = (ArrayList<Station>) ois.readObject();
-                ois.close();
-                //Преобразуем ArrayList<Stations> в обычный массив объектов Station
-                mStations = new Station[returnlist.size()];
-                returnlist.toArray(mStations);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (DepartureBehaviorID == 0 && DestinationBehaviorID == 2){
+            readStationsFromFile(LIST_OF_DEPARTURE_STATIONS);
+        } else if (!DepartureBehaviorID && DestinationBehaviorID){
             //Попробуем здесь получить ссылку на файл с массивом станций назначения, прочесть его содержимое и преобразовать в лист с помощью адаптера.
-            FileInputStream fis;
-            try {
-                fis = openFileInput(LIST_OF_DESTINATION_STATIONS);
-                ObjectInputStream ois = new ObjectInputStream(fis);
-                ArrayList<Station> returnlist = (ArrayList<Station>) ois.readObject();
-                ois.close();
-                //Преобразуем ArrayList<Stations> в обычный массив объектов Station
-                mStations = new Station[returnlist.size()];
-                returnlist.toArray(mStations);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            readStationsFromFile(LIST_OF_DESTINATION_STATIONS);
         }
 
         departureAdapter = new DepartureAdapter(getApplicationContext(), mStations);
@@ -93,5 +73,20 @@ public class DepartureActivity extends ListActivity {
             }
         });
 
+    }
+
+    private void readStationsFromFile(String listOfDepartureStations) {
+        FileInputStream fis;
+        try {
+            fis = openFileInput(listOfDepartureStations);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Station> returnlist = (ArrayList<Station>) ois.readObject();
+            ois.close();
+            //Преобразуем ArrayList<Stations> в обычный массив объектов Station
+            mStations = new Station[returnlist.size()];
+            returnlist.toArray(mStations);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

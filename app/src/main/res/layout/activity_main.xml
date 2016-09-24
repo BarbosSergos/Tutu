@@ -15,11 +15,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutSearchFields">
 
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editTextDepartureAddress"
-            android:hint="Enter station of departure"
+            android:hint="@string/choose_station_of_departure"
             android:layout_weight="1"
             android:gravity="center_vertical|center_horizontal"
             android:onClick="departureMethod"/>
@@ -28,11 +29,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editTextDestinationAddress"
-            android:hint="Enter destination station"
-            android:layout_weight="1"
+            android:hint="@string/choose_destination_station"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="center_vertical|center_horizontal"
             android:onClick="destinationMethod"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/datePicker"
+            android:hint="@string/choose_departure_date"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="callDatePicker"/>
+
+
     </LinearLayout>
 
 </LinearLayout>

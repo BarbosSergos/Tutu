@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Москва-Воронеж хрен догонишь!</string>
+    <string name="choose_destination_station">Выберите станцию \"отправления\"</string>
+    <string name="choose_station_of_departure">Выберите станцию \"назначения\"</string>
+    <string name="emptyTextView_Text">Станция не найдена.</string>
+    <string name="choose_departure_date">Выберите дату отправления</string>
+</resources>
