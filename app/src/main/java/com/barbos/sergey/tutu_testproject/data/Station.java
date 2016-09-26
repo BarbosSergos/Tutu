@@ -1,9 +1,14 @@
 package com.barbos.sergey.tutu_testproject.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by Sergey on 20.09.2016.
  */
-public class Station {
+public class Station implements Parcelable, Serializable {
 
     private String mCountryTitle;
     private String mCityTitle;
@@ -25,6 +30,26 @@ public class Station {
         mRegionTitle = regionTitle;
         mDistrictTitle = districtTitle;
     }
+
+    protected Station(Parcel in) {
+        mCountryTitle = in.readString();
+        mCityTitle = in.readString();
+        mStationTitle = in.readString();
+        mRegionTitle = in.readString();
+        mDistrictTitle = in.readString();
+    }
+
+    public static final Creator<Station> CREATOR = new Creator<Station>() {
+        @Override
+        public Station createFromParcel(Parcel in) {
+            return new Station(in);
+        }
+
+        @Override
+        public Station[] newArray(int size) {
+            return new Station[size];
+        }
+    };
 
     public String getCountryTitle() {
         return mCountryTitle;
@@ -64,5 +89,19 @@ public class Station {
 
     public void setDistrictTitle(String districtTitle) {
         mDistrictTitle = districtTitle;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mCountryTitle);
+        parcel.writeString(mCityTitle);
+        parcel.writeString(mStationTitle);
+        parcel.writeString(mRegionTitle);
+        parcel.writeString(mDistrictTitle);
     }
 }

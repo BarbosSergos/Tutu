@@ -1,68 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.MainActivity"
-    android:nestedScrollingEnabled="false">
+    android:nestedScrollingEnabled="false"
+    android:background="@android:color/black">
 
-    <SearchView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:inputType="text"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchView"
-        android:layout_alignParentStart="true">
+        android:id="@+id/linearLayoutSearchFields"
+        android:background="@android:color/black"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/DepartureAddressMainActivity"
+            android:hint="@string/choose_station_of_departure"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="departureMethod"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="40dp"
+            android:enabled="false"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/DestinationAddressMainActivity"
+            android:hint="@string/choose_destination_station"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="destinationMethod"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="20dp"
+            android:enabled="false"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/datePicker"
+            android:hint="@string/choose_departure_date"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="callDatePicker"
+            android:background="@drawable/edittext_background"
+            android:layout_marginBottom="60dp"
+            android:enabled="false"/>
+
+        <Button
+            android:text="  Show schelduler  "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:id="@+id/showSchelduler"
+            android:background="@drawable/edittext_background"
+            android:layout_gravity="center_horizontal"
+            android:onClick="showSchelduler"/>
 
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:dropDownHeight="wrap_content"
-                android:fontFamily="sans-serif"
-                android:isScrollContainer="true"
-                android:layout_weight="1"
-                android:visibility="visible"
-                android:hint="Enter departure station here"
-                android:id="@+id/autoCompleteDeparture"/>
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textViewShowStatus"
+            android:text="Loading data..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="30dp"
+            android:textColor="@android:color/background_light"
+            android:gravity="center_horizontal"
+            />
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:id="@+id/progressBar"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"/>
 
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:id="@+id/autoCompleteDestination"
-                android:hint="Enter destination station here"
-                android:dropDownHeight="wrap_content"
-                android:fontFamily="sans-serif"
-                android:isScrollContainer="true"
-                android:layout_weight="1"
-                android:visibility="visible"/>
-        </LinearLayout>
+
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

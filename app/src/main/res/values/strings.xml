@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">Tutu_testProject</string>
+    <string name="app_name">One way ticket</string>
+    <string name="emptyTextView_Text">Stantion not found.</string>
+    <string name="choose_station_of_departure">Choose departure station</string>
+    <string name="choose_destination_station">Choose destination station</string>
+    <string name="choose_departure_date">Choose departure date</string>
+    <string name="type_station_name">Type station name</string>
+    <string name="SCHELDULER_TOAST">We\'ll display it as soon as we\'ll know it :)</string>
+    <string name="EXIT_COMFIRMATION">Are you sure want to exit?</string>
+    <string name="EXIT_OK">Yes</string>
+    <string name="EXIT_CANCELED">Cancel</string>
+    <string name="About">About</string>
+    <string name="Copyright">This application has been created by Sergey Yashchenkov in terms of test task on Junior Android vacancy opened in Tutu.\n
+All rights reserved.</string>
+    <string name="Version">\nVersion </string>
 </resources>
