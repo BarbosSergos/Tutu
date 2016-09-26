@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity {
         mTextViewCopyright = (TextView) view.findViewById(R.id.tvCopyright);
         mTextViewCopyright.setText(R.string.Copyright);
         mTextViewVersion = (TextView) view.findViewById(R.id.tvVersion);
-        mTextViewVersion.setText(getResources().getString(R.string.Version) + " " + versionName);
+        mTextViewVersion.setText(getResources().getString(R.string.Version) + " " + versionName + "\n\n");
 
         return adb.create();
     }

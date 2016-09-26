@@ -11,6 +11,6 @@
     <string name="EXIT_CANCELED">Нет</string>
     <string name="EXIT_OK">Да</string>
     <string name="About">О приложении</string>
-    <string name="Copyright">Данное приложение подготовил Ященков Сергей Александрович, в рамках тестового задания на позицию Junior Android в Tutu.\\n             Все права защищены.</string>
-    <string name="Version">\\nВерсия</string>
+    <string name="Copyright">\nДанное приложение подготовил Ященков Сергей Александрович, в рамках тестового задания на позицию Junior Android в Tutu.\n             Все права защищены.</string>
+    <string name="Version">\nВерсия</string>
 </resources>
