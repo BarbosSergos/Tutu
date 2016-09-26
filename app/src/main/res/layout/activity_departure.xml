@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_departure"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.barbos.sergey.tutu_testproject.ui.DepartureActivity">
+    tools:context="com.barbos.sergey.tutu_testproject.ui.DepartureActivity"
+    android:background="@android:color/black">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/emptyTextView_Text"
-            android:id="@android:id/empty"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emptyTextView_Text"
+        android:id="@android:id/empty"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/background_light"
+        android:textColorHighlight="@android:color/background_light"
+        android:textColorHint="@android:color/background_light"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -23,18 +27,24 @@
         android:id="@android:id/list"
         android:divider="?attr/dividerHorizontal"
         android:dividerHeight="2dp"
-        android:paddingTop="30dp"/>
+        android:paddingTop="30dp"
+        android:background="@android:color/background_dark"
+        android:layout_below="@+id/editTextSearch"
+        android:longClickable="true"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignParentTop="true"
         android:id="@+id/editTextSearch"
         tools:text="Name Sergey"
+        android:hint="@string/type_station_name"
         android:textAlignment="center"
         android:gravity="center_vertical|center_horizontal"
         android:inputType="textVisiblePassword"
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="10dp"
+        android:background="@drawable/edittext_background"
+        android:drawableLeft="@android:drawable/ic_search_category_default"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

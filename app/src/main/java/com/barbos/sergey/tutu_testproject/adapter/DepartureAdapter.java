@@ -22,6 +22,11 @@ import java.util.List;
 public class DepartureAdapter extends BaseAdapter implements Filterable{
 
     private Context mContext;
+
+    public Station[] getStationList() {
+        return mStationList;
+    }
+
     private Station[] mStationList;
     private Station[] mCopyOfFullStationList;
 
@@ -55,7 +60,7 @@ public class DepartureAdapter extends BaseAdapter implements Filterable{
             viewConvert = LayoutInflater.from(mContext).inflate(R.layout.display_one_station_list, null);
             viewHolder = new ViewHolder();
             viewHolder.mCityTitle = (TextView) viewConvert.findViewById(R.id.cityTitleTextView);
-            viewHolder.mRegionTitle = (TextView) viewConvert.findViewById(R.id.regionTitleTextView);
+            viewHolder.mCountryTitle = (TextView) viewConvert.findViewById(R.id.regionTitleTextView);
             viewHolder.mStationTitle = (TextView) viewConvert.findViewById(R.id.stationTitileTextVIew);
 
             viewConvert.setTag(viewHolder);
@@ -67,7 +72,7 @@ public class DepartureAdapter extends BaseAdapter implements Filterable{
         Station station = mStationList[position];
 
         viewHolder.mCityTitle.setText(station.getCityTitle());
-        viewHolder.mRegionTitle.setText(station.getRegionTitle());
+        viewHolder.mCountryTitle.setText(station.getCountryTitle());
         viewHolder.mStationTitle.setText(station.getStationTitle());
 
         return viewConvert;
@@ -121,6 +126,6 @@ public class DepartureAdapter extends BaseAdapter implements Filterable{
     public static class ViewHolder{
         private TextView mCityTitle;
         private TextView mStationTitle;
-        private TextView mRegionTitle;
+        private TextView mCountryTitle;
     }
 }
